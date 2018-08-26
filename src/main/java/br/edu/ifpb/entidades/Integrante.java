@@ -5,16 +5,42 @@
  */
 package br.edu.ifpb.entidades;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 /**
  *
  * @author mathe
  */
-public class Integrante {
+@Entity
+@SequenceGenerator(
+        name="seq_name",
+        allocationSize = 1,
+        initialValue = 1,
+        sequenceName = "integrante_sequencia"
+)
+public class Integrante implements Serializable{
+    @Id
+    @GeneratedValue(generator = "seq_name", strategy = GenerationType.SEQUENCE)
     private long id;
     private String nome;
+    @Embedded
+    @AttributeOverride(
+            name="numero",
+            column = @Column(
+                    name = "cpf_integrante"
+            )
+    )
     private CPF cpf;
     private LocalDate dataDeNascimento;
 

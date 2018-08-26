@@ -6,11 +6,13 @@
 package br.edu.ifpb.entidades;
 
 import java.util.Objects;
+import javax.persistence.Embeddable;
 
 /**
  *
  * @author mathe
  */
+@Embeddable
 public class CPF {
     private String numero;
 
