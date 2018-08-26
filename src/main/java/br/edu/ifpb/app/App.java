@@ -5,6 +5,7 @@
  */
 package br.edu.ifpb.app;
 
+import br.edu.ifpb.daos.DaoIntegrante;
 import br.edu.ifpb.entidades.CPF;
 import br.edu.ifpb.entidades.Integrante;
 import java.time.LocalDate;
@@ -19,18 +20,8 @@ import javax.persistence.Persistence;
  */
 public class App {
     public static void main(String[] args) {
-        CPF cpf = new CPF("111.111.111-11");
-
-        EntityManager manager = Persistence
-                    .createEntityManagerFactory("dac-atividade-persistence")
-                    .createEntityManager();
-        EntityTransaction transaction = manager.getTransaction();
-
-        transaction.begin();
-        //Método para persistir objeto
-        Integrante integrante = new Integrante("Matheus Moreira Luna", cpf, LocalDate.of(1996, 4, 24));
-        manager.persist(integrante);
-
-        transaction.commit();
+        DaoIntegrante daoIntegrante = new DaoIntegrante();
+        Integrante integrante = daoIntegrante.read("Matheus Moreira Luna");
+        System.out.println(integrante.toString());
     }
 }
