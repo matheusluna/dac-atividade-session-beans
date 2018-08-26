@@ -5,11 +5,13 @@
  */
 package br.edu.ifpb.entidades;
 
+import br.edu.ifpb.conversores.LocalDateConverter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -42,6 +44,7 @@ public class Integrante implements Serializable{
             )
     )
     private CPF cpf;
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate dataDeNascimento;
 
     public Integrante() {
