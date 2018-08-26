@@ -12,7 +12,6 @@ import java.util.Objects;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Convert;
-import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,8 +49,7 @@ public class Integrante implements Serializable{
     public Integrante() {
     }
 
-    public Integrante(long id, String nome, CPF cpf, LocalDate dataDeNascimento) {
-        this.id = id;
+    public Integrante(String nome, CPF cpf, LocalDate dataDeNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;
