@@ -5,18 +5,42 @@
  */
 package br.edu.ifpb.entidades;
 
+import br.edu.ifpb.conversores.LocalDateConverter;
 import br.edu.ifpb.enums.Estilo;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 /**
  *
  * @author mathe
  */
-public class Album {
+@Entity
+@SequenceGenerator(
+        name="seq_album",
+        allocationSize = 1,
+        initialValue = 1,
+        sequenceName = "album_sequencia"
+)
+public class Album implements Serializable{
+    @Enumerated(EnumType.STRING)
     private Estilo estilo;
+    @OneToOne
     private Banda banda;
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate anoDeLançamento;
+    @Id
+    @GeneratedValue(generator = "seq_album", strategy = GenerationType.SEQUENCE)
+    private Long ID;
 
     public Album() {
     }
@@ -87,6 +111,14 @@ public class Album {
     @Override
     public String toString() {
         return "Album{" + "estilo=" + estilo + ", banda=" + banda + ", anoDeLan\u00e7amento=" + anoDeLançamento + '}';
+    }
+
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
     }
     
 }

@@ -5,17 +5,34 @@
  */
 package br.edu.ifpb.entidades;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 /**
  *
  * @author mathe
  */
-public class Banda {
+@Entity
+@SequenceGenerator(
+        name="seq_banda",
+        allocationSize = 1,
+        initialValue = 1,
+        sequenceName = "banda_sequencia"
+)
+public class Banda implements Serializable{
+    @Id
+    @GeneratedValue(generator = "seq_banda", strategy = GenerationType.SEQUENCE)
     private long id;
     private String localDeOrigem;
     private String nomeFantasia;
+    @OneToMany
     private List<Integrante> integrantes;
 
     public Banda() {

@@ -21,7 +21,7 @@ import javax.persistence.Persistence;
 public class App {
     public static void main(String[] args) {
         DaoIntegrante daoIntegrante = new DaoIntegrante();
-        Integrante integrante = daoIntegrante.read("Matheus Moreira Luna");
-        System.out.println(integrante.toString());
+        Integrante integrante = daoIntegrante.read("João Ferreira Silva");
+        daoIntegrante.delete(integrante);
     }
 }

@@ -5,8 +5,9 @@
  */
 package br.edu.ifpb.daos;
 
+import br.edu.ifpb.entidades.Banda;
 import br.edu.ifpb.entidades.Integrante;
-import br.edu.ifpb.interfaces.DaoIntegranteInterface;
+import br.edu.ifpb.interfaces.DaoBandaInterface;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -16,11 +17,11 @@ import javax.persistence.Persistence;
  *
  * @author mathe
  */
-public class DaoIntegrante implements DaoIntegranteInterface{
+public class DaoBanda  implements DaoBandaInterface{
     private EntityManager manager;
     private EntityTransaction transaction;
 
-    public DaoIntegrante() {
+    public DaoBanda() {
         this.manager = Persistence
                 .createEntityManagerFactory("dac-atividade-persistence")
                 .createEntityManager();
@@ -28,36 +29,29 @@ public class DaoIntegrante implements DaoIntegranteInterface{
     }
 
     @Override
-    public boolean create(Integrante integrante) {
-        Integrante i = read(integrante.getNome());
-        if(i == null){
-            transaction.begin();
-            manager.persist(integrante);
-            transaction.commit();
-            return true;
-        }else{
-            return false;
-        }
+    public boolean create(Banda banda) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Integrante read(String nome) {
+    public Banda read(String nomeFantasia) {
         List<Object> consulta;
         transaction.begin();
-        consulta = manager.createQuery("SELECT i FROM Integrante i WHERE i.nome = :nome").setParameter("nome", nome).getResultList();
+        consulta = manager.createQuery("SELECT b FROM Banda b WHERE b.nomeFantasia = :nome").setParameter("nome", nomeFantasia).getResultList();
         transaction.commit();
         if(consulta.size() != 0){
-            return (Integrante) consulta.get(0);
+            return (Banda) consulta.get(0);
         }
         return null;
     }
 
     @Override
-    public boolean delete(Integrante integrante) {
+    public boolean delete(Banda banda) {
         transaction.begin();
-        manager.remove(integrante);
+        manager.remove(banda);
         transaction.commit();
         return true;
     }
+    
     
 }
