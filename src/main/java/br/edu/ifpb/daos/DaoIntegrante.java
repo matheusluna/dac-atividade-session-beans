@@ -7,6 +7,7 @@ package br.edu.ifpb.daos;
 
 import br.edu.ifpb.entidades.Integrante;
 import br.edu.ifpb.interfaces.DaoIntegranteInterface;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -58,6 +59,23 @@ public class DaoIntegrante implements DaoIntegranteInterface{
         manager.remove(integrante);
         transaction.commit();
         return true;
+    }
+
+    @Override
+    public List<Integrante> list() {
+        List<Object> consulta;
+        List<Integrante> integrantes = new ArrayList<>();
+        transaction.begin();
+        consulta = manager.createQuery("SELECT i FROM Integrante i").getResultList();
+        transaction.commit();
+        if(consulta.size() != 0){
+            for( Object c : consulta){
+                Integrante i = (Integrante) c;
+                integrantes.add(i);
+            }
+            return integrantes;
+        }
+        return integrantes;
     }
     
 }

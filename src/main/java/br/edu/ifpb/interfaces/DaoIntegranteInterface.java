@@ -6,6 +6,7 @@
 package br.edu.ifpb.interfaces;
 
 import br.edu.ifpb.entidades.Integrante;
+import java.util.List;
 
 /**
  *
@@ -15,4 +16,5 @@ public interface DaoIntegranteInterface {
     public boolean create(Integrante integrante);
     public Integrante read(String nome);
     public boolean delete(Integrante integrante);
+    public List<Integrante> list();
 }

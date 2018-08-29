@@ -5,10 +5,34 @@
  */
 package br.edu.ifpb.controladores;
 
+import br.edu.ifpb.entidades.Integrante;
+import br.edu.ifpb.services.ServiceIntegrante;
+import java.io.Serializable;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+
 /**
  *
  * @author mathe
  */
-public class ControladorIntegrante {
+@RequestScoped
+public class ControladorIntegrante implements Serializable{
     
+    @EJB
+    private ServiceIntegrante serviceIntegrante;
+    private Integrante novoIntegrante = new Integrante();
+    
+    public void add(){
+        serviceIntegrante.add(novoIntegrante);
+        novoIntegrante = new Integrante();
+    }
+    
+    public void delete(){
+        serviceIntegrante.remove(novoIntegrante);
+    }
+    
+    public List<Integrante> list(){
+        return serviceIntegrante.list();
+    }
 }
